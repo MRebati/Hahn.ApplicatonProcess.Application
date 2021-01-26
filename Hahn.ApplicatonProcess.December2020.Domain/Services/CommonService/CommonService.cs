@@ -72,7 +72,7 @@ namespace Hahn.ApplicationProcess.December2020.Domain.Services.CommonService
         public async Task<List<Country>> GetAllCountriesAsync()
         {
             var cachedList = _cacheManagement.GetValue<List<Country>>(AppConst.Cache.CountryList);
-            if (cachedList.Any())
+            if (cachedList != null && cachedList.Any())
             {
                 return cachedList;
             }
