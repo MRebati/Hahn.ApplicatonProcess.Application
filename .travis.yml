@@ -1,0 +1,5 @@
+language: csharp
+solution: Hahn.ApplicatonProcess.Application.sln
+install:
+  - nuget restore Hahn.ApplicatonProcess.Application.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
