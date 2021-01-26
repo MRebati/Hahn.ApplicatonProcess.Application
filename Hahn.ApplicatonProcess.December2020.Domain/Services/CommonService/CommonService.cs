@@ -9,7 +9,6 @@ using Hahn.ApplicationProcess.December2020.Domain.Configuration;
 using Hahn.ApplicationProcess.December2020.Domain.Entities;
 using Hahn.ApplicationProcess.December2020.Domain.Infrastructure;
 using Hahn.ApplicationProcess.December2020.Domain.Utilities;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -17,119 +16,102 @@ namespace Hahn.ApplicationProcess.December2020.Domain.Services.CommonService
 {
     public class CommonService : BaseService, ICommonService
     {
+        #region props
+        
         private readonly IConfiguration _configuration;
         private readonly ILogger<CommonService> _logger;
         private readonly ICacheManagement _cacheManagement;
 
+        #endregion
+
+        #region ctor
+        
         public CommonService(
-            IConfiguration configuration, 
-            ILogger<CommonService> logger, 
+            IConfiguration configuration,
+            ILogger<CommonService> logger,
             ICacheManagement cacheManagement)
         {
             _configuration = configuration;
             _logger = logger;
             _cacheManagement = cacheManagement;
-        }
+        } 
 
-        public async Task<Country> GetCountryByName(string countryName)
+        #endregion
+
+        public async Task<Country> GetCountryByNameAsync(string countryName)
         {
             var apiUrl = _configuration.GetValue<string>(AppConst.ExternalApis.CountryCheck.Url);
+            _logger.LogInformation("started calling api for country by name: {countryName}", countryName);
             var response = await apiUrl
                 .AllowAnyHttpStatus()
                 .AppendPathSegment(countryName)
-                .SetQueryParam("fullText",true)
+                .SetQueryParam("fullText", true)
                 .GetAsync();
+            _logger.LogInformation("fetched data from api for country by name: {countryName}", countryName);
 
             if (response.StatusCode < 300)
             {
+                _logger.LogInformation("api response looks normal, countryName: {countryName}", countryName);
                 var result = await response.GetJsonAsync<List<Country>>();
-                _logger.LogDebug("get country by name: ");
-                Console.WriteLine($"Success! {result}");
+                
                 return result.FirstOrDefault();
             }
             else if (response.StatusCode < 500)
             {
+                _logger.LogWarning("api response status code is {statusCode}, countryName: {countryName}", response.StatusCode, countryName);
                 var error = await response.GetJsonAsync<ExternalServiceHttpResponse>();
-                Console.WriteLine($"You did something wrong! {error}");
             }
             else
             {
+                _logger.LogWarning("api response status code is {statusCode}, countryName: {countryName}", response.StatusCode, countryName);
                 var error = await response.GetJsonAsync<ExternalServiceHttpResponse>();
-                Console.WriteLine($"We did something wrong! {error}");
-            }
-            return null;
-        }
-        
-        public List<Country> GetAllCountries()
-        {
-            var result = new List<Country>();
-
-            var apiUrl = _configuration.GetValue<string>(AppConst.ExternalApis.CountryCheck.Url);
-            var response = apiUrl
-                .AllowAnyHttpStatus()
-                .GetAsync().Result;
-
-            if (response.StatusCode < 300)
-            {
-                result = response.GetJsonAsync<List<Country>>().Result;
-                _logger.LogDebug("get country by name: ");
-                Console.WriteLine($"Success! {result}");
-                return result.ToList();
-            }
-            else if (response.StatusCode < 500)
-            {
-                var error = response.GetJsonAsync<ExternalServiceHttpResponse>();
-                Console.WriteLine($"You did something wrong! {error}");
-            }
-            else
-            {
-                var error = response.GetJsonAsync<ExternalServiceHttpResponse>().Result;
-                Console.WriteLine($"We did something wrong! {error}");
             }
             return null;
         }
 
         public async Task<List<Country>> GetAllCountriesAsync()
         {
-            return _cacheManagement.CacheCall<>(
-                AppConst.Cache.CountryList, 
-                AppConst.Cache.DefaultTimeoutInSeconds, 
-                 GetAllCountriesFromApi);
+            var cachedList = _cacheManagement.GetValue<List<Country>>(AppConst.Cache.CountryList);
+            if (cachedList.Any())
+            {
+                return cachedList;
+            }
+            return _cacheManagement.CacheCall(
+                AppConst.Cache.CountryList,
+                AppConst.Cache.DefaultTimeoutInSeconds,
+                await GetAllCountriesFromApi());
         }
+
+        #region private methods
 
         private async Task<List<Country>> GetAllCountriesFromApi()
         {
             var apiUrl = _configuration.GetValue<string>(AppConst.ExternalApis.CountryCheck.Url);
+            _logger.LogInformation("started calling api for all countries");
             var response = await apiUrl
                 .AllowAnyHttpStatus()
                 .GetAsync();
-
+            _logger.LogInformation("fetched data from api for all countries");
             if (response.StatusCode < 300)
             {
+                _logger.LogInformation("country list api response looks normal");
                 var result = await response.GetJsonAsync<List<Country>>();
-                _logger.LogDebug("get country by name: ");
-                Console.WriteLine($"Success! {result}");
                 return result.ToList();
             }
             else if (response.StatusCode < 500)
             {
+                _logger.LogWarning("country list api response status code is {statusCode}", response.StatusCode);
                 var error = await response.GetJsonAsync<ExternalServiceHttpResponse>();
-                Console.WriteLine($"You did something wrong! {error}");
             }
             else
             {
+                _logger.LogWarning("country list api response status code is {statusCode}", response.StatusCode);
                 var error = await response.GetJsonAsync<ExternalServiceHttpResponse>();
-                Console.WriteLine($"We did something wrong! {error}");
             }
             return null;
         }
 
-    }
+        #endregion
 
-    public interface ICommonService
-    {
-        Task<Country> GetCountryByName(string countryName);
-        List<Country> GetAllCountries();
-        Task<List<Country>> GetAllCountriesAsync();
     }
 }

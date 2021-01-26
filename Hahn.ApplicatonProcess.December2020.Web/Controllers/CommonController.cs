@@ -30,7 +30,7 @@ namespace Hahn.ApplicationProcess.December2020.Web.Controllers
         [HttpGet("country/{countryName}")]
         public async Task<IActionResult> GetCountryName(string countryName)
         {
-            var result = await _commonService.GetCountryByName(countryName);
+            var result = await _commonService.GetCountryByNameAsync(countryName);
             return Ok(result);
         }
 

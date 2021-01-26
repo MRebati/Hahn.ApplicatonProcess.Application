@@ -13,7 +13,7 @@
     }
   },
 
-  //services
+  //applicant service
   {
     "Key": "getting applicant with id: {applicantId} failed",
     "LocalizedValue": {
@@ -66,6 +66,68 @@
     "Key": "getting applicant list failed",
     "LocalizedValue": {
       "en-US": "getting applicant list failed"
+    }
+  },
+
+  //common service
+  {
+    "Key": "started calling api for country by name: {countryName}",
+    "LocalizedValue": {
+      "en-US": "started calling api for country by name: {countryName}"
+    }
+  },
+  {
+    "Key": "fetched data from api for country by name: {countryName}",
+    "LocalizedValue": {
+      "en-US": "fetched data from api for country by name: {countryName}"
+    }
+  },
+  {
+    "Key": "api response looks normal, countryName: {countryName}",
+    "LocalizedValue": {
+      "en-US": "api response looks normal, countryName: {countryName}"
+    }
+  },
+  {
+    "Key": "api response status code is {statusCode}, countryName: {countryName}",
+    "LocalizedValue": {
+      "en-US": "api response status code is {statusCode}, countryName: {countryName}"
+    }
+  },
+  {
+    "Key": "api response status code is {statusCode}, countryName: {countryName}",
+    "LocalizedValue": {
+      "en-US": "api response status code is {statusCode}, countryName: {countryName}"
+    }
+  },
+  {
+    "Key": "started calling api for all countries",
+    "LocalizedValue": {
+      "en-US": "started calling api for all countries"
+    }
+  },
+  {
+    "Key": "fetched data from api for all countries",
+    "LocalizedValue": {
+      "en-US": "fetched data from api for all countries"
+    }
+  },
+  {
+    "Key": "country list api response looks normal",
+    "LocalizedValue": {
+      "en-US": "country list api response looks normal"
+    }
+  },
+  {
+    "Key": "country list api response status code is {statusCode}",
+    "LocalizedValue": {
+      "en-US": "country list api response status code is {statusCode}"
+    }
+  },
+  {
+    "Key": "country list api response status code is {statusCode}",
+    "LocalizedValue": {
+      "en-US": "country list api response status code is {statusCode}"
     }
   },
 
