@@ -1,0 +1,86 @@
+<template>
+  <div class="container mt-4 mb-4">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card shadow-sm">
+            
+
+          <div class="card-body">
+            <div class="card-title">
+              ${title}
+              <a
+                route-href="route: insert"
+                className="btn btn-outline-skype btn-sm float-right"
+                class="float-right text-decoration-none"
+              >
+              <font-awesome-icon icon.bind="['far', 'plus-circle']"><font-awesome-icon></font-awesome-icon>
+                 Insert new Applicant
+              </a>
+            </div>
+            <hr />
+            
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="searchBy"
+                    placeholder="Please enter id and press enter"
+                    value.bind="searchBy"
+                    change.delegate="searchById($event.target.value)"
+                  />
+                </div>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-hover" datavalue.bind="applicants">
+                <thead class="">
+                  <tr>
+                    <th>NO</th>
+                    <th>Name</th>
+                    <th>Family Name</th>
+                    <th>Address</th>
+                    <th>Country Origin</th>
+                    <th>Email Address</th>
+                    <th>Age</th>
+                    <th>Hired</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody if.bind="applicant.length == 0">
+                  <tr>
+                    <td colspan="10" class="text-center">No items found!</td>
+                  </tr>
+                </tbody>
+                <tbody if.bind="applicants.length">
+                  <tr repeat.for="applicant of applicants">
+                    <td>${applicant.id}</td>
+                    <td>${applicant.name}</td>
+                    <td>${applicant.familyName}</td>
+                    <td>${applicant.address}</td>
+                    <td>${applicant.countryOfOrigin}</td>
+                    <td>${applicant.emailAddress}</td>
+                    <td>${applicant.age}</td>
+                    <td>${applicant.hired ? 'YES' : 'NO'}</td>
+                    <td>
+                      <a
+                        class="text-info mr-1"
+                        style="cursor: pointer"
+                        route-href="route: update; params.bind: {id:applicant.id}"
+                        >EDIT<i class="fa fa-edit"></i
+                      ></a>
+                      <a
+                        class="text-danger"
+                        style="cursor: pointer"
+                        click.delegate="removeApplicant(applicant.id)"
+                        >DELETE<i class="fa fa-trash"></i
+                      ></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

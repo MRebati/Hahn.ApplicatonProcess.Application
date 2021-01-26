@@ -1,0 +1,18 @@
+{
+    "applicant": {
+        "Id": "Id",
+        "Name": "Name",
+        "FamilyName": "FamilyName",
+        "Address": "Address",
+        "CountryOfOrigin": "Country of origin",
+        "EmailAddress": "Email Address",
+        "Age": "Age",
+        "Hired": "Hired"
+    },
+    "applicants": "applicants",
+    "messages_sure": "Are you sure?",
+    "messages_success_title": "Success!",
+    "messages_success_message": "request was successfully done!",
+    "yes": "yes",
+    "no": "no"
+}

@@ -1,0 +1,115 @@
+[
+  //controller method logging
+  {
+    "Key": "an error occurred on action \"{methodName}\" on datetime: {date}, Ex: {ex}",
+    "LocalizedValue": {
+      "en-US": "an error occurred on action \"{methodName}\" on datetime: {date}, Ex: {ex}"
+    }
+  },
+  {
+    "Key": "\"{methodName}\" fired on datetime: {date}",
+    "LocalizedValue": {
+      "en-US": "\"{methodName}\" fired on datetime: {date}"
+    }
+  },
+
+  //services
+  {
+    "Key": "getting applicant with id: {applicantId} failed",
+    "LocalizedValue": {
+      "en-US": "getting applicant with id: {applicantId} failed"
+    }
+  },
+  {
+    "Key": "insert applicant was successful, applicantId: {applicantId}",
+    "LocalizedValue": {
+      "en-US": "insert applicant was successful, applicantId: {applicantId}"
+    }
+  },
+  {
+    "Key": "inserting applicant failed",
+    "LocalizedValue": {
+      "en-US": "inserting applicant failed"
+    }
+  },
+  {
+    "Key": "update applicant was successful, applicantId: {applicantId}",
+    "LocalizedValue": {
+      "en-US": "update applicant was successful, applicantId: {applicantId}"
+    }
+  },
+  {
+    "Key": "updating applicant failed, applicantId: {applicantId}",
+    "LocalizedValue": {
+      "en-US": "updating applicant failed, applicantId: {applicantId}"
+    }
+  },
+  {
+    "Key": "deleting applicant was successful, applicantId: {applicantId}",
+    "LocalizedValue": {
+      "en-US": "deleting applicant was successful, applicantId: {applicantId}"
+    }
+  },
+  {
+    "Key": "insert applicant failed, applicantId: {applicantId}",
+    "LocalizedValue": {
+      "en-US": "insert applicant failed, applicantId: {applicantId}"
+    }
+  },
+  {
+    "Key": "getting applicant list was successful",
+    "LocalizedValue": {
+      "en-US": "getting applicant list was successful"
+    }
+  },
+  {
+    "Key": "getting applicant list failed",
+    "LocalizedValue": {
+      "en-US": "getting applicant list failed"
+    }
+  },
+
+  // validation
+  {
+    "Key": "name must be at least 5 characters long",
+    "LocalizedValue": {
+      "en-US": "name must be at least 5 characters long"
+    }
+  },
+  {
+    "Key": "please specify a name (first name)",
+    "LocalizedValue": {
+      "en-US": "please specify a name (first name)"
+    }
+  },
+  {
+    "Key": "please specify a family name (last name)",
+    "LocalizedValue": {
+      "en-US": "please specify a family name (last name)"
+    }
+  },
+  {
+    "Key": "family name must be at least 5 characters long",
+    "LocalizedValue": {
+      "en-US": "family name must be at least 5 characters long"
+    }
+  },
+  {
+    "Key": "age must be between 20 to 60",
+    "LocalizedValue": {
+      "en-US": "age must be between 20 to 60"
+    }
+  },
+  {
+    "Key": "Email Address must be in valid form",
+    "LocalizedValue": {
+      "en-US": "Email Address must be in valid form"
+    }
+  },
+  {
+    "Key": "Address must be at least 10 characters long",
+    "LocalizedValue": {
+      "en-US": "Address must be at least 10 characters long"
+    }
+  }
+]

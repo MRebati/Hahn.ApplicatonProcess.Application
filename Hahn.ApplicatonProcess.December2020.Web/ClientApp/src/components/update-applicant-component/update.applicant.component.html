@@ -1,0 +1,165 @@
+<template>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card mt-4 mb-4 shadow-sm">
+          <div class="card-body">
+            <div class="card-title">
+              <i class="fa fa-table"></i> ${title}
+              <a
+                route-href="route: list"
+                className="btn btn-outline-skype btn-sm"
+                class="float-right text-decoration-none"
+              >
+                <i class="fa fa-plus-circle line-height-10"></i> Back To List
+              </a>
+            </div>
+            <hr />
+
+            <form submit.trigger="execute()">
+              <div class="form-group">
+                <label for="name">Id</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="id"
+                  placeholder="Id will generate automatically"
+                  value.bind="applicant.id"
+                  readonly
+                />
+              </div>
+
+              <div
+                class="form-group"
+                validation-errors.bind="nameErrors"
+                class.bind="nameErrors.length ? 'has-error' : ''"
+              >
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  class.bind="nameErrors.length ? 'is-invalid' : ''"
+                  id="name"
+                  placeholder="Name"
+                  name="name"
+                  value.bind="applicant.name & validate"
+                />
+              </div>
+
+              <div
+                class="form-group"
+                validation-errors.bind="familyNameErrors"
+                class.bind="familyNameErrors.length ? 'has-error' : ''"
+              >
+                <label for="familyName">Family name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  class.bind="familyNameErrors.length ? 'is-invalid' : ''"
+                  id="familyName"
+                  name="familyName"
+                  placeholder="Enter family name"
+                  value.bind="applicant.familyName & validate"
+                />
+              </div>
+
+              <div
+                class="form-group"
+                validation-errors.bind="addressErros"
+                class.bind="addressErros.length ? 'has-error' : ''"
+              >
+                <label for="address">Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  class.bind="addressErros.length ? 'is-invalid' : ''"
+                  id="address"
+                  name="address"
+                  placeholder="Enter address"
+                  value.bind="applicant.address & validate"
+                />
+              </div>
+
+              <div
+                class="form-group"
+                validation-errors.bind="countryOfOriginErros"
+                class.bind="countryOfOriginErros.length ? 'has-error' : ''"
+              >
+                <label for="address">Country of origin</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  class.bind="countryOfOriginErros.length  ? 'is-invalid' : ''"
+                  id="countryOfOrigin"
+                  name="countryOfOrigin"
+                  placeholder="Country of origin"
+                  value.bind="applicant.countryOfOrigin & validate"
+                />
+              </div>
+
+              <div
+                class="form-group"
+                validation-errors.bind="emailAddressErrors"
+                class.bind="emailAddressErrors.length ? 'has-error' : ''"
+              >
+                <label for="emailAddress">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  class.bind="emailAddressErrors.length ? 'is-invalid' : ''"
+                  id="emailAddress"
+                  name="emailAddress"
+                  placeholder="Enter email"
+                  value.bind="applicant.emailAddress & validate"
+                />
+              </div>
+
+              <div
+                class="form-group"
+                validation-errors.bind="ageErrors"
+                class.bind="ageErrors.length ? 'has-error' : ''"
+              >
+                <label for="age">Age</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  class.bind="ageErrors.length ? 'is-invalid' : ''"
+                  id="age"
+                  name="age"
+                  placeholder="Enter age"
+                  value.bind="applicant.age & validate"
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="checkbox"
+                  id="chkActive"
+                  name="chkActive"
+                  checked.bind="applicant.hired"
+                  change.delegate="isChecked($event.target.checked)"
+                  name="hired"
+                  className="form-check-input"
+                />
+                <label class="form-check-label" for="user-checkbox1">
+                  Hired
+                </label>
+              </div>
+
+              <div class="form-footer">
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  disabled.bind="!canSave"
+                  style="cursor: pointer"
+                >
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
