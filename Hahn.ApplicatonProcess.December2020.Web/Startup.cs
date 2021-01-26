@@ -87,10 +87,10 @@ namespace Hahn.ApplicationProcess.December2020.Web
 
                 if (env.IsDevelopment())
                 {
-                    //spa.UseAureliaCliServer("start");
+                    spa.UseAureliaCliServer("start");
 
                     //we can proxy to the application on a manual "npm start" command running in clienApp folder
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
                 }
             });
         }
