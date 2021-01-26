@@ -2,6 +2,8 @@
 
 This is a test application with AspnetCore and Aurelia with base functionalities and based on Clean-Architecture.
 
+[![Build Status](https://www.travis-ci.com/MRebati/Hahn.ApplicatonProcess.Application.svg?branch=master)](https://www.travis-ci.com/MRebati/Hahn.ApplicatonProcess.Application)
+
 ## Getting Started
 
 1. run `nuget restore` on solution projects
